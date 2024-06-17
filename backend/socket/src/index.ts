@@ -3,7 +3,6 @@ import http from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import routes from './routes';
 import { KafkaProducer, RedisClient, SocketHandler } from './services';
-import { supabase } from './supabase';
 import expressApp from './utils/express-app';
 
 
@@ -13,7 +12,6 @@ const startServer = async () => {
 
   await kafkaProducer.connect();
   await redisClient.connect();
-  await supabase()
 
   const app = express();
   const server = http.createServer(app);
