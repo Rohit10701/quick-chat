@@ -1,4 +1,4 @@
-# Welcome to Messenger App!
+# Welcome to Quick Chat!
 
 Hi! This repo is basically a **attempt** of clone messenger-app while keeping things simple
 
@@ -12,6 +12,10 @@ This app should able to do the following things : -
 
 Optional : - 
 1. *Local Caching* to recent text and attachment
+
+## System Design
+
+![image](https://github.com/Rohit10701/messenger-app-backend/assets/62689661/2ccfcfeb-a0c2-4a9a-8ef1-aa714fa056fd)
 
 ## **Messenger App functionality**
 

@@ -3,7 +3,7 @@ import http from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import routes from './routes';
 import { KafkaProducer, RedisClient, SocketHandler } from './services';
-import { supabase } from './supabase';
+import { supabase } from './utils/supabase';
 import expressApp from './utils/express-app';
 
 
