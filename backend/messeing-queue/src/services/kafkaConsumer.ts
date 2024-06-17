@@ -5,7 +5,7 @@ import { RedisClientType } from 'redis';
 import Message from '../models/message';
 
 const processMessage = async ({ topic, partition, message }: EachMessagePayload, redisClient: RedisClientType, socket: Socket) => {
-  const messageContent = JSON.parse(message?.value?.toString());
+  const messageContent = JSON.parse(message.value?.toString() ?? '');
   const messageId = uuidv4(); // Generate unique ID for the message
   console.log(`Received message from topic ${topic}:`, messageContent);
 
