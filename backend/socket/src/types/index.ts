@@ -1,1 +1,4 @@
-export {default as Message } from "./message"
+import { MessageEvent } from "./message";
+import { MessageToRoomEvent } from "./message";
+
+export {MessageEvent, MessageToRoomEvent}
