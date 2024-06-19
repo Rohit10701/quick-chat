@@ -9,9 +9,11 @@ import {
 } from "redux-persist";
 import persistStore from "redux-persist/lib/persistStore";
 import { authReducer } from "./slices/auth-slice";
+import { chatSessionReducer } from "./slices/chat-session-slice";
 
 const rootReducer = combineReducers({
-  auth : authReducer
+  auth : authReducer,
+  chat : chatSessionReducer
 });
 
 export const store = configureStore({
