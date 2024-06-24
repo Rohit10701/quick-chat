@@ -1,3 +1,3 @@
 import authMiddleware from "./auth";
-
-export { authMiddleware }
+import errorHandler from "./error"
+export { authMiddleware, errorHandler }

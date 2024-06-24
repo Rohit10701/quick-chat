@@ -3,7 +3,8 @@ import http from 'http';
 
 import { connectDB } from './utils/database/mongo-connection';
 import { MONGO_URL } from './config';
-import { authRouter } from './routes';
+import { authRouter, contactRouter } from './routes';
+import { authMiddleware, errorHandler } from './middleware';
 
 const app = express();
 const server = http.createServer(app);
@@ -13,7 +14,9 @@ const startServer = async () => {
 
   app.use(express.json());
   app.use(`/api/${process.env.VERSION}/auth`, authRouter)
+  app.use(`/api/${process.env.VERSION}/contact`, contactRouter)
 
+  app.use([errorHandler, authMiddleware])
   server.listen(3002, async () => {
     console.log('Listening on *:3002');
   });

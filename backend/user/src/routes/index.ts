@@ -1,3 +1,3 @@
 import authRouter from "./auth";
-
-export {authRouter}
+import contactRouter from "./contact";
+export {authRouter , contactRouter}

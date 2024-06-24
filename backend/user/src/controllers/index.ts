@@ -1,4 +1,4 @@
 import AuthController from "./auth";
 import UserController from "./user";
-
-export {AuthController, UserController}
+import ContactController from "./contact";
+export {AuthController, UserController, ContactController}
