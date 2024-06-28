@@ -1,32 +1,35 @@
-import express from 'express';
-import http from 'http';
+import express from 'express'
+import http from 'http'
 import cors from 'cors'
-import { connectDB } from './utils/database/mongo-connection';
-import { MONGO_URL } from './config';
-import { authRouter, contactRouter } from './routes';
-import { authMiddleware, errorHandler } from './middleware';
+import { connectDB } from './utils/database/mongo-connection'
+import { MONGO_URL } from './config'
+import { authRouter, contactRouter } from './routes'
+import { authMiddleware, errorHandler } from './middleware'
 
-const app = express();
-const server = http.createServer(app);
+const app = express()
+const server = http.createServer(app)
 
 const startServer = async () => {
-  await connectDB(MONGO_URL);
+	await connectDB(MONGO_URL)
 
-  app.use(express.json());
-  app.use(`/api/${process.env.VERSION}/auth`, authRouter)
-  app.use(`/api/${process.env.VERSION}/contact`, authMiddleware, contactRouter)
+	app.use(express.json())
+	app.use(`/api/${process.env.VERSION}/auth`, authRouter)
+	app.use(`/api/${process.env.VERSION}/contact`, authMiddleware, contactRouter)
 
-  app.use([errorHandler])
-  app.use(cors({
-    origin: '*',
-  }));
-  server.listen(3002, async () => {
-    console.log('Listening on *:3002');
-  });
+	app.use([errorHandler])
+	app.use(
+		cors({
+			origin: '*',
+			credentials: true
+		})
+	)
+	server.listen(3002, async () => {
+		console.log('Listening on *:3002')
+	})
 
-  process.on('SIGINT', async () => {
-    process.exit();
-  });
-};
+	process.on('SIGINT', async () => {
+		process.exit()
+	})
+}
 
-startServer();
+startServer()
