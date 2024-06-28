@@ -1,9 +1,10 @@
-import { AuthError } from '@supabase/supabase-js'
+import { SerializedError } from '@reduxjs/toolkit'
 import { AppDispatch, RootState } from '../store'
+import { AxiosError } from 'axios'
 
 
 export type AuthThunkApiConfig = {
   dispatch: AppDispatch
   state: RootState
-  rejectValue: AuthError | null
+  rejectValue: SerializedError | null
 }

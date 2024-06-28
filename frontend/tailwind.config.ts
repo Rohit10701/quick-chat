@@ -13,21 +13,19 @@ const config: Config = {
         black: "#000000",           
         "charcoal": "#333333",
         "graphite": "#424242",
-        
         "ebony": "#555555",
         "jet-black": "#666666",
-
-        "cinder": "#777777",
-        
+        "cinder": "#777777",      
         "slate": "#888888",
         "iron": "#999999",
-
         "smoke": "#AAAAAA",
-        "whisper-white": "#DDDDDD",
+        "whisperWhite": "#DDDDDD",
         "white" : "#fff",
+        "msgblue" : "#006aff",
 
 
-        "msgblue" : "#006aff"
+
+        "baseBlack" : "#222222"
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

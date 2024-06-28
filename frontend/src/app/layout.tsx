@@ -26,7 +26,7 @@ export default function RootLayout({
 					<ThemeProvider
 						enableSystem={true}
 						attribute='class'>
-						<div className='flex'>
+						<div className='flex dark:bg-baseBlack'>
 							<Menu />
 							{children}
 						</div>

@@ -14,7 +14,7 @@ const Layout = ({children} : LayoutProps) => {
   return (
     <div className='flex w-full h-[100vh]'>
         <Contacts pageName={pathName === "/chat" ? "Chats" : "Archived"} />
-        {activeChatSession ? <ChatBody /> : <div className='flex justify-center items-center w-full'> NO CHATS</div>} 
+        {activeChatSession ? <ChatBody /> : <div className='flex justify-center items-center w-full  dark:bg-ebony'> NO CHATS</div>} 
         {children}
     </div>
   )

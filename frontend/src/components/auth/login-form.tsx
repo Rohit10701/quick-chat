@@ -24,7 +24,7 @@ const LoginForm = (props: Props) => {
     });
   
     const handleLogin = async () => {
-        console.log(formData)
+      console.log(formData)
       try {
         dispatch(login(formData));
         router.replace("/")
