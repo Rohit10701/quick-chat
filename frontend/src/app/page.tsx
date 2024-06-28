@@ -6,11 +6,14 @@ import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { createClient } from "@/utils/supabase/client";
 import { Session } from "@supabase/supabase-js";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "@/libs/redux/selectors/auth-selector";
 
 export default function Home() {
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-
+  const session = useSelector(selectIsLoggedIn)
+  console.log(session)
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -18,26 +21,6 @@ export default function Home() {
 
   const currentTheme = theme === "system" ? systemTheme : theme;
 
-  const [session, setSession] = useState<Session | null>(null)
-  const supabase = createClient()
-    useEffect(() => {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        setSession(session)
-      })
-
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange((_event, session) => {
-        setSession(session)
-      })
-
-      return () => subscription.unsubscribe()
-    }, [])
-
-
-    const handleSignOut = async()=>{
-      await supabase.auth.signOut();
-    }
     
     if (!mounted) return null;
 
@@ -75,7 +58,7 @@ export default function Home() {
           )}
         </div>
       </div>
-      <button onClick={handleSignOut}>Signout</button>
+      <button>Signout</button>
     </div>
   );
 }
