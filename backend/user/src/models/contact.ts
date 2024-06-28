@@ -1,18 +1,19 @@
-import { Schema, model } from "mongoose";
+import { Document, Schema, model } from "mongoose";
+import { userDetails } from "../types";
 
 
-interface IContacts extends Document {
-    user_id : string;
-    contact_id : string;
+
+interface IContacts extends Document<string> {
+    user : userDetails;
+    contact : userDetails;
     last_message : string;
     message : string;
     message_type : "text" | "media";
-    _id : string;
 }
 
 const contactSchema = new Schema<IContacts>({
-    user_id : { type: String, required: true },
-    contact_id : { type: String, required: true},
+    user: { type: Object, required: true },
+    contact : { type: Object, required: true},
     last_message : { type: String },
     message : { type: String },
     message_type: { type: String, enum: ["text", "media"] }

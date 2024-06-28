@@ -1,6 +1,6 @@
 import express from 'express';
 import http from 'http';
-
+import cors from 'cors'
 import { connectDB } from './utils/database/mongo-connection';
 import { MONGO_URL } from './config';
 import { authRouter, contactRouter } from './routes';
@@ -14,9 +14,12 @@ const startServer = async () => {
 
   app.use(express.json());
   app.use(`/api/${process.env.VERSION}/auth`, authRouter)
-  app.use(`/api/${process.env.VERSION}/contact`, contactRouter)
+  app.use(`/api/${process.env.VERSION}/contact`, authMiddleware, contactRouter)
 
-  app.use([errorHandler, authMiddleware])
+  app.use([errorHandler])
+  app.use(cors({
+    origin: '*',
+  }));
   server.listen(3002, async () => {
     console.log('Listening on *:3002');
   });

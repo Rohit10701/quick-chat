@@ -1,16 +1,17 @@
-// models/userModel.ts
 import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-interface IUser extends Document {
+interface IUser extends Document<string> {
   username: string;
   email: string;
   password: string;
   createdAt: Date;
   refreshToken: string | null;
+  photo: string;
   comparePassword: (password: string) => Promise<boolean>;
-  _id : string
 }
+
+export type UserDocument = IUser & Document;
 
 const userSchema = new Schema<IUser>({
   username: { type: String, required: true },
@@ -18,6 +19,7 @@ const userSchema = new Schema<IUser>({
   password: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   refreshToken: { type: String, default: null },
+  photo :{type : String }
 });
 
 // Hash the password before saving the user [Some copy paste code]
@@ -35,3 +37,4 @@ userSchema.methods.comparePassword = function (password: string): Promise<boolea
 
 const UserModel = model<IUser>('User', userSchema);
 export default UserModel;
+export {IUser}

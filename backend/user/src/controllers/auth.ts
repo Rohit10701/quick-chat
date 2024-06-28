@@ -2,14 +2,9 @@
 import { Request, Response, NextFunction } from 'express';
 import {UserModel} from '../models';
 import jwt from 'jsonwebtoken';
+import { generateAccessToken, generateRefreshToken } from '../utils/helper/auth';
 
-const generateAccessToken = (user: { id: string }) => {
-  return jwt.sign(user, process.env.JWT_SECRET!, { expiresIn: '15m' });
-};
 
-const generateRefreshToken = (user: { id: string }) => {
-  return jwt.sign(user, process.env.JWT_REFRESH_SECRET!, { expiresIn: '7d' });
-};
 
 const AuthController = {
   register: async (req: Request, res: Response, next: NextFunction) => {
@@ -35,6 +30,7 @@ const AuthController = {
   login: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { email, password } = req.body;
+      console.log(email, password)
       const user = await UserModel.findOne({ email });
       if (!user || !(await user.comparePassword(password))) {
         return res.status(401).json({ message: 'Invalid email or password' });
@@ -44,7 +40,10 @@ const AuthController = {
       const refreshToken = generateRefreshToken({ id: user._id });
       user.refreshToken = refreshToken;
       await user.save();
-      res.json({ accessToken, refreshToken });
+
+      res.set('Access-Control-Allow-Origin' , "http://localhost:3000")
+      res.set('Access-Control-Allow-Credentials', 'true')
+      res.json({user_id : user._id.toString(), username : user.username, email, accessToken, });
     } catch (error) {
       next(error);
     }
