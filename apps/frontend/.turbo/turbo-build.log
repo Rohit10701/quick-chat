@@ -1,0 +1,26 @@
+[2K[1G[1myarn run v1.22.22[22m
+[2K[1G[2m$ next build[22m
+  [1m[38;2;173;127;168m▲ Next.js 14.2.3[39m[22m
+  - Environments: .env
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+ [32m[1m✓[22m[39m Compiled successfully
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[?25h
+[36m./src/hooks/useGetConatcts.ts[39m
+[33m38[39m:[33m5[39m  [33m[1mWarning[22m[39m: React Hook useEffect has a missing dependency: 'fetchContacts'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
+
+[36minfo[39m  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[31mFailed to compile.
+[39m
+[36m./src/components/auth/login-form.tsx[39m:[33m29[39m:[33m24[39m
+[31m[1mType error[22m[39m: Expected 0 arguments, but got 1.
+
+[0m [90m 27 |[39m       console[33m.[39mlog(formData)[0m
+[0m [90m 28 |[39m       [36mtry[39m {[0m
+[0m[31m[1m>[22m[39m[90m 29 |[39m         dispatch(login(formData))[33m;[39m[0m
+[0m [90m    |[39m                        [31m[1m^[22m[39m[0m
+[0m [90m 30 |[39m         router[33m.[39mreplace([32m"/"[39m)[0m
+[0m [90m 31 |[39m       } [36mcatch[39m (error) {[0m
+[0m [90m 32 |[39m         console[33m.[39merror([32m"Login error:"[39m[33m,[39m error)[33m;[39m[0m
+[?25h[2K[1G[31merror[39m Command failed with exit code 1.
+[2K[1G[34minfo[39m Visit [1mhttps://yarnpkg.com/en/docs/cli/run[22m for documentation about this command.

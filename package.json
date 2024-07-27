@@ -1,5 +1,16 @@
 {
-  "dependencies": {
-    "socket.io-client": "^4.7.5"
-  }
+  "name": "quick-chat",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "docker-compose -f docker-compose.yaml up -d && turbo run dev",
+    "build": "turbo run build",
+    "docker:down": "docker-compose -f docker-compose.yaml down"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.9"
+  },
+  "packageManager": "yarn@1.22.22"
 }

@@ -27,3 +27,15 @@ Optional : -
 1.  _Scalability: The messenger app needs to be able to handle a large number of users and high traffic loads. This would involve designing the application to be scalable, including using technologies such as load balancers and distributed systems._
 2.  _Mobile and web: The messenger app should be designed for web and mobile platforms so that it can be used on any device._
 3.  _Analytics: The messenger app would need to be designed to track usage and engagement metrics, including user engagement, message engagement, and other key performance indicators._
+
+
+## System Design
+
+![image](https://github.com/Rohit10701/messenger-app-backend/assets/62689661/2ccfcfeb-a0c2-4a9a-8ef1-aa714fa056fd)
+
+
+## configuration
+1. Frontend - Port 3000
+2. Socket - Port 5001
+3. Test-Kafka - Port 5002
+4. User - Port 5003
