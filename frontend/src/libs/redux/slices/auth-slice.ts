@@ -1,13 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { SerializedError, createSlice } from '@reduxjs/toolkit';
 import { AuthError, Session, User } from '@supabase/supabase-js';
 import { login, signup } from '../actions/auth-action'; // Import both actions
+import { AxiosError } from 'axios';
+import { LoginResponse } from '../types/auth-type';
 
 type AuthState = {
   isLoggedIn: boolean;
-  session?: Session | null;
-  user?: User | null;
+  user?: LoginResponse | null;
   loading?: boolean;
-  error?: AuthError | null;
+  error?: SerializedError | null;
 };
 
 const initialState: AuthState = {
@@ -26,14 +27,14 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
+        const  data  = action.payload?.data;
         state.loading = false;
-        state.user = action.payload.user;
-        state.session = action.payload.session;
+        state.user = data;
         state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.error
       })
 
 
@@ -45,12 +46,10 @@ const authSlice = createSlice({
       .addCase(signup.fulfilled, (state, action) => {
         state.loading = false;
         state.isLoggedIn = true;
-        state.user = action.payload.user;
-        state.session = action.payload.session;
       })
       .addCase(signup.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.error;
       });
   },
 });

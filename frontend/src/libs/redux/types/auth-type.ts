@@ -1,4 +1,3 @@
-import { User, Session, WeakPassword } from "@supabase/supabase-js";
 
 export type LoginParams = {
   email: string;
@@ -6,16 +5,12 @@ export type LoginParams = {
 };
 
 export type LoginResponse =
-  | {
-      user: User;
-      session: Session;
-      weakPassword?: WeakPassword | undefined;
-    }
-  | {
-      user: null;
-      session: null;
-      weakPassword?: null | undefined;
-    };
+  {
+    user_id : string;
+    username : string;
+    email : string;
+    accessToken : string;
+  }
 
 export type SingupParams = {
   email: string;
@@ -23,13 +18,8 @@ export type SingupParams = {
 };
 
 export type SignupResponse =
-  | {
-      user: User;
-      session: Session | null;
-      error?: null | undefined;
-    }
-  | {
-      user: null;
-      session: null;
-      weakPassword?: WeakPassword;
-    };
+{
+  user_id : string;
+  username : string;
+  email : string;
+}

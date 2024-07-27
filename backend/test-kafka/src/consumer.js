@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const socket = io('ws://localhost:3000');
 
-mongoose.connect(`${process.env.MONGO_DB_URL}`, {
+mongoose.connect(`${"mongodb+srv://rohitkumar10701:1234567890@cluster0.cvnjmbj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

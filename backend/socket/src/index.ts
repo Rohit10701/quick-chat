@@ -1,35 +1,44 @@
-import express from "express";
-import http from "http";
-import { supabase } from "./supabase";
-import expressApp from "./utils/express-app";
-import { PORT, SOCKET_PORT } from "./config";
-import WebSocketServer from "./services/web-socket";
+import express from 'express';
+import http from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+import routes from './routes';
+import { KafkaProducer, RedisClient, SocketHandler } from './services';
+import expressApp from './utils/express-app';
+
 
 const startServer = async () => {
+  const kafkaProducer = new KafkaProducer();
+  const redisClient = new RedisClient();
+
+  await kafkaProducer.connect();
+  await redisClient.connect();
+
   const app = express();
   const server = http.createServer(app);
-  
-  supabase();
-  await expressApp(app);
-  new WebSocketServer(server);
+  const io = new SocketIOServer(server, {
+    cors: {
+      origin: 'http://localhost:3002', // Your frontend's URL
+      methods: ['GET', 'POST'],
+      allowedHeaders: ['Content-Type'],
+      credentials: true
+    }
+  });
+  await expressApp(app)
+  app.use(routes);
 
-  server
-    .listen(SOCKET_PORT, () => {
-      console.log(`socket server listening to port ${SOCKET_PORT}`);
-    })
-    .on("error", (err) => {
-      console.log(err);
-      process.exit();
-    });
-  
-  app
-    .listen(PORT, () => {
-      console.log(`listening to port ${PORT}`);
-    })
-    .on("error", (err) => {
-      console.log(err);
-      process.exit();
-    });
+  const socketHandler = new SocketHandler(io, kafkaProducer, redisClient);
+  socketHandler.init();
+
+  const PORT = process.env.PORT || 3000;
+  server.listen(PORT, () => {
+    console.log(`Listening on *:${PORT}`);
+  });
+
+  process.on('SIGINT', async () => {
+    await kafkaProducer.disconnect();
+    await redisClient.disconnect();
+    process.exit();
+  });
 };
 
 startServer();
