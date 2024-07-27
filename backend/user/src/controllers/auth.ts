@@ -41,7 +41,7 @@ const AuthController = {
       user.refreshToken = refreshToken;
       await user.save();
 
-      res.set('Access-Control-Allow-Origin' , "http://localhost:3000")
+      res.set('Access-Control-Allow-Origin' , "http://localhost:3003")
       res.set('Access-Control-Allow-Credentials', 'true')
       res.json({user_id : user._id.toString(), username : user.username, email, accessToken, });
     } catch (error) {

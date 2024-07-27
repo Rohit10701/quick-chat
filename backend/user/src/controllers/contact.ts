@@ -33,15 +33,24 @@ const ContactController = {
 				return res.status(400).json({ message: 'Contact already exists' })
 			}
 
-			const newContact = new ContactModel({
+			const newContactUser = new ContactModel({
 				user: userDetails,
 				contact: contactDetails,
 				last_message,
 				message,
 				message_type
 			})
-			await newContact.save()
-			res.status(201).json({ newContact })
+			const newContactContact = new ContactModel({
+				user: contactDetails,
+				contact: userDetails,
+				last_message,
+				message,
+				message_type
+			})
+			await newContactUser.save()
+			await newContactContact.save()
+
+			res.status(201).json({ newContactUser })
 		} catch (error) {
 			next(error)
 		}
@@ -60,7 +69,7 @@ const ContactController = {
 	listContact: async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			// baseUrl/user/mongodbId
-			const { id } = req.params
+			const { id } = req.user
 			const page = parseInt(req.query.page as string) || 1
 			const limit = parseInt(req.query.limit as string) || 10
 			const skip = (page - 1) * limit
