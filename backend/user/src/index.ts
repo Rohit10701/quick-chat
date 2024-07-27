@@ -11,18 +11,18 @@ const server = http.createServer(app)
 
 const startServer = async () => {
 	await connectDB(MONGO_URL)
-
-	app.use(express.json())
-	app.use(`/api/${process.env.VERSION}/auth`, authRouter)
-	app.use(`/api/${process.env.VERSION}/contact`, authMiddleware, contactRouter)
-
-	app.use([errorHandler])
 	app.use(
 		cors({
 			origin: '*',
 			credentials: true
 		})
 	)
+	app.use(express.json())
+	app.use(`/api/${process.env.VERSION}/auth`, authRouter)
+	app.use(`/api/${process.env.VERSION}/contact`, authMiddleware, contactRouter)
+
+	app.use([errorHandler])
+
 	server.listen(3002, async () => {
 		console.log('Listening on *:3002')
 	})
